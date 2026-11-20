@@ -1,6 +1,10 @@
+package gambling;
+
+import gambling.games.*;
+import gambling.util.*;
 import java.util.Scanner;
 
-public class gambling {
+public class Main {
     public static void main(String[] args) {
         Scanner userin = new Scanner(System.in);
         int point = 0;

@@ -1,3 +1,6 @@
+package gambling.games;
+
+import gambling.util.*;
 public class Card {
     private static boolean[][] played = new boolean[5][14];
     private static int cardsDrawn = 0;

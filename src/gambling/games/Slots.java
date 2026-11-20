@@ -1,3 +1,6 @@
+package gambling.games;
+
+import gambling.util.*;
 import java.util.Scanner;
 
 public class Slots {
