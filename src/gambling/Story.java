@@ -10,7 +10,7 @@ public class Story {
         userin.nextLine();
         System.out.print("hours later your scrolling on a dark web market place and see a listing. \n$1,000,000,000 for a cure to cancer, the listing say it's going to be taken down in 60 days \n(Enter to continue)");
         userin.nextLine();
-        System.out.print("but when you check your bank account you and you have $0.64, you here the casino in town gives loans \n(Enter to continue)");
+        System.out.print("but when you check your bank account you have $0.64, you here the casino in town gives loans \n(Enter to continue)");
         userin.nextLine();
 
 

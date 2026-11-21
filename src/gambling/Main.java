@@ -18,7 +18,11 @@ public class Main {
 
         // game loop
         while (Input.isYes(input)) {
-                if (point <= 0) {
+
+
+
+            //get a loan
+            if (point <= 0) {
                     System.out.print("your broke haha, but I'll give you a loan how much do you want to borrow? you have: " + point + " points \n(max loan 1500) loan amount:");
                     amount = userin.nextInt();
                     if (amount + debt > 1500) {
@@ -39,6 +43,9 @@ public class Main {
                 game = (int) (6* Math.random());
             }
 
+
+
+            //pick a game
             switch (game) {
                 case 0: point = NumberGame.play(userin, point, count == 0); break;
                 case 1: point = Blackjack.play(userin, point); break;
@@ -49,6 +56,9 @@ public class Main {
                 default: System.out.println("That's not a game!"); break;
             }
 
+
+
+            //payback loan
             if (debt > 0 && (count + 1) % 5 == 0) {
                 int payment = Math.min(debt, Math.max(1, debt / 10));
                 System.out.println("you have to pay back part of your loan now... hope you made some money");
@@ -64,19 +74,39 @@ public class Main {
                 point -= tip;
             }
 
+
+            //win loss, loss, new day logic
+            {
+            //day 60
             if (count == 60) {
                 System.out.println("its day 60 you have: " + point + " points");
+
+                //win
                 if (point >= 1000000000){
                     System.out.println("you made enough you can afford the payment good job!");
                     point -= 1000000000;
                 }
-            }
-            
+                //loss
+                else {
+                    System.out.println("you dont have enough, your mothers going to die. you had: " + point + ", you needed: " + (1000000000 - point) + " more points.");
+                    break;
+                }
+            } 
 
-            // restart or end
-            System.out.println("day: " + count + "would you like to play new day");
-            input = userin.nextLine();
-            count++;
+            // restart if you can
+            else if (debt != 1500 && point != 0){
+                // restart or end
+                System.out.println("day: " + count + " of 60. would you like to play new day");
+                input = userin.nextLine();
+                count++;
+            } 
+
+            //you have no mony and cant take out a loan
+            else {
+                System.out.println("you lost, on day: " + count + ", your mother will die now.");
+                break;
+            }
+        }
         }
     }
 }
