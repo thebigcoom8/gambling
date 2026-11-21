@@ -9,7 +9,7 @@ public class Main {
         Scanner userin = new Scanner(System.in);
         int point = 0;
         String input = "yes";
-        int count = 60;
+        int count = 0;
         int amount = 0;
         int debt = 0;
         
