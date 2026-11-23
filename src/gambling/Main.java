@@ -18,14 +18,8 @@ public class Main {
         //test
         switch (test) {
             case 1: Story.play(userin, 60, false); break;
-            case 2: Story.play(userin, 60, true); break;
+            case 2: Story.play(userin, 60, false); break;
             case 3: EndOfLoop.check(count, point, debt, userin); break;
-            case 4: point = NumberGame.play(userin, point, count == 1); break;
-            case 5: point = Blackjack.play(userin, point); break;
-            case 6: point = Slots.play(userin, point); break;
-            case 7: point = Roulette.play(userin, point); break;
-            case 8: point = Craps.play(userin, point); break;
-            case 9: point = CoinFlip.play(userin, point); break;
             default: break;
         }
 
