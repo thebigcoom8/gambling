@@ -13,7 +13,7 @@ public class Main {
         int amount = 0;
         int debt = 0;
         boolean win = false;
-        int test = 3;
+        int test = 0;
 
         //test
         switch (test) {
