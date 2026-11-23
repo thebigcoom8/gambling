@@ -52,8 +52,8 @@ public class Blackjack {
         }
 
         System.out.println("Your cards are:");
-        System.out.println(ufc);
-        System.out.println(usc);
+        System.out.println(ufc + " " + ufc.getCardEmoji());
+        System.out.println(usc + " " + usc.getCardEmoji());
         System.out.println("Your value is: " + userscore + "\nDealer showing: " + dscore);
 
         Card dsc = new Card();
