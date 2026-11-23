@@ -13,7 +13,7 @@ public class Main {
         int amount = 0;
         int debt = 0;
 
-        Story.play(userin);
+        Story.play(userin, count);
 
         // game loop
         while (Input.isYes(input)) {
