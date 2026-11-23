@@ -12,8 +12,24 @@ public class Main {
         int count = 1; // Starting at Day 1 makes Day 60 exact
         int amount = 0;
         int debt = 0;
+        boolean win = false;
+        int test = 0;
 
-        Story.play(userin, count);
+        //test
+        switch (test) {
+            case 1: Story.play(userin, 60, false); break;
+            case 2: Story.play(userin, 60, true); break;
+            case 3: EndOfLoop.check(count, point, debt, userin); break;
+            case 4: point = NumberGame.play(userin, point, count == 1); break;
+            case 5: point = Blackjack.play(userin, point); break;
+            case 6: point = Slots.play(userin, point); break;
+            case 7: point = Roulette.play(userin, point); break;
+            case 8: point = Craps.play(userin, point); break;
+            case 9: point = CoinFlip.play(userin, point); break;
+            default: break;
+        }
+
+        Story.play(userin, count, win);
 
         // game loop
         while (Input.isYes(input)) {
@@ -72,20 +88,8 @@ public class Main {
                 }
             }
 
-            // win, loss, and new day logic
-            if (count == 60) {
-                System.out.println("it's day 60, you have: " + point + " points");
-
-                if (point >= 1000000000) {
-                    System.out.println("you made enough you can afford the payment, good job!");
-                    point -= 1000000000;
-                    break;
-                } else {
-                    System.out.println("you don't have enough, your mother is going to die. you had: " + point + ", you needed: " + (1000000000 - point) + " more points.");
-                    break;
-                }
-            } else if (debt >= 1500 && point <= 0) {
-                System.out.println("you lost, on day: " + count + ", your mother will die now.");
+            // win, loss, and new day logic 
+            if (EndOfLoop.check(count, point, debt, userin)) {
                 break;
             } else {
                 System.out.println("day: " + count + " of 60. would you like to play new day?");
