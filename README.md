@@ -22,7 +22,7 @@ JDK 17 or newer.
 ```
 mkdir -p bin
 javac -d bin $(find src -name "*.java")
-java -cp bin gambling.Main
+jar cfe gambling.jar gambling.Main -C bin .
 ```
 
 ## Status
