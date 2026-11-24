@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Betting {
     public static final int INVALID = -1;
-    public static final int CHEAT = -69; // secret slots bet
 
     /**
      * Prompts for a bet and validates it.
@@ -22,9 +21,6 @@ public class Betting {
             return INVALID;
         }
 
-        if (allowCheat && bet == CHEAT) {
-            return CHEAT;
-        }
         if (bet <= 0 || bet > points) {
             System.out.println("Invalid bet!");
             return INVALID;

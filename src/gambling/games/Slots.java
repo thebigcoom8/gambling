@@ -13,13 +13,7 @@ public class Slots {
             int bet = Betting.getBet(in, point, "You have: " + point + " points, make a bet: ", true);
 
             if (bet != Betting.INVALID) {
-                boolean cheat = (bet == Betting.CHEAT);
-                if (cheat) {
-                    point -= bet * 2; // original behavior: subtracting -69 twice
-                    System.out.println("You win!... kinda");
-                } else {
-                    point -= bet;
-                }
+                point -= bet;
 
                 int[] middleRow = spin();
                 int r1 = middleRow[0];
@@ -33,9 +27,7 @@ public class Slots {
                     matchedNum = r2;
                 }
 
-                if (cheat) {
-                    // no payout check on the cheat bet
-                } else if (r1 == r2 && r2 == r3) {
+               if (r1 == r2 && r2 == r3) {
                     point += bet * 10;
                     System.out.println("You hit the jackpot! You have: " + point + " points");
                 } else if (matchedNum >= 5) {
