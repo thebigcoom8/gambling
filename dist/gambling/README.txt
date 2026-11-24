@@ -1,4 +1,4 @@
-Gambling 0.1.0
+Gambling dev
 Requires Java 17 or newer.
 
 Windows:        double-click run.bat (use Windows Terminal for emojis)

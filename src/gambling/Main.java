@@ -15,14 +15,24 @@ public class Main {
         boolean win = false;
         int test = 0;
 
-        //test
+        // test mode
         switch (test) {
-            case 1: Story.play(userin, 60, false); break;
-            case 2: Story.play(userin, 60, false); break;
-            case 3: EndOfLoop.check(count, point, debt, userin); break;
+            case 1:  EndOfLoop.check(count, point, debt, userin); break;
+            case 2:  point = NumberGame.play(userin, point, count == 1); break;
+            case 3:  point = Blackjack.play(userin, point); break;
+            case 4:  point = Slots.play(userin, point); break;
+            case 5:  point = Roulette.play(userin, point); break;
+            case 6:  point = Craps.play(userin, point); break;
+            case 7:  point = CoinFlip.play(userin, point); break;
+            case 8:  Story.play(userin, 5, false); break;
+            case 9:  Story.play(userin, 60, false); break;
+            case 10: Story.play(userin, 60, true); break;
             default: break;
         }
 
+        if (test != 0) {
+            return;
+        }
         Story.play(userin, count, win);
 
         // game loop

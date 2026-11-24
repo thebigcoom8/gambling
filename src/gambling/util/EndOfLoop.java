@@ -18,12 +18,14 @@ public class EndOfLoop {
             } else {
                 System.out.println("you don't have enough, your mother is going to die. you had: "
                         + point + ", you needed: " + (GOAL - point) + " more points.");
+                Story.play(userin, count, false);
             }
             return true;
         }
 
         if (debt >= 1500 && point <= 0) {
             System.out.println("you lost, on day: " + count + ", your mother will die now.");
+            Story.play(userin, count, false);
             return true;
         }
 
