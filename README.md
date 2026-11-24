@@ -58,6 +58,7 @@ bin/gambling/util/              Betting.class, Input.class
 dist/                           Gambling-(version).zip
 dist/gambling/                  README.txt, gambling.jar, run.bat, run.sh
 build.sh                        builds the JAR and the release zip
+update.sh                       update logic
 ```
 
 ## Status
