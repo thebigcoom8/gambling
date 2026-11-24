@@ -76,7 +76,7 @@ unzip -l "dist/$ZIP"
 
 # keep build output out of git
 touch .gitignore
-for p in bin/ dist/ '*.jar'; do grep -qxF "$p" .gitignore || echo "$p" >> .gitignore; done
+for p in '*.jar'; do grep -qxF "$p" .gitignore || echo "$p" >> .gitignore; done
 
 echo
 echo "Done: dist/$ZIP"
