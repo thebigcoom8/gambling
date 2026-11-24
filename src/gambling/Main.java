@@ -15,9 +15,8 @@ public class Main {
         boolean win = false;
         int test = 0;
 
-        //test
+        // test mode
         switch (test) {
-            
             case 1:  EndOfLoop.check(count, point, debt, userin); break;
             case 2:  point = NumberGame.play(userin, point, count == 1); break;
             case 3:  point = Blackjack.play(userin, point); break;
@@ -34,7 +33,6 @@ public class Main {
         if (test != 0) {
             return;
         }
-
         Story.play(userin, count, win);
 
         // game loop
