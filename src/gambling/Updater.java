@@ -44,10 +44,24 @@ public final class Updater {
             .build();
     }
 
+    private static final boolean DEBUG = System.getenv("GAMBLING_DEBUG") != null;
+
+    private static void dbg(String msg) {
+        if (DEBUG) {
+            System.out.println("[updater] " + msg);
+        }
+    }
+
     public static Release findUpdate() {
         try {
             String current = currentVersion();
-            if (current == null || current.equals("dev") || runningJar() == null) {
+            dbg("running version: " + current);
+            if (current == null || current.equals("dev")) {
+                dbg("skipping: dev build or no version.txt in jar (build with ./build.sh 0.1.0)");
+                return null;
+            }
+            if (runningJar() == null) {
+                dbg("skipping: not running from a .jar file");
                 return null;
             }
             HttpRequest req = HttpRequest.newBuilder(URI.create(LATEST_URL))
@@ -56,12 +70,21 @@ public final class Updater {
                 .timeout(Duration.ofSeconds(5))
                 .build();
             HttpResponse<String> resp = client().send(req, HttpResponse.BodyHandlers.ofString());
+            dbg("GitHub API status: " + resp.statusCode());
             if (resp.statusCode() != 200) {
                 return null;
             }
             Release latest = parseRelease(resp.body());
-            return (latest != null && isNewer(latest.version(), current)) ? latest : null;
+            if (latest == null) {
+                dbg("no usable release: need a tag_name plus a gambling-*.zip asset with a sha256 digest");
+                return null;
+            }
+            dbg("latest release: " + latest.version());
+            boolean newer = isNewer(latest.version(), current);
+            dbg(newer ? "update available" : "not newer than " + current);
+            return newer ? latest : null;
         } catch (Exception e) {
+            dbg("failed: " + e);
             return null;
         }
     }
