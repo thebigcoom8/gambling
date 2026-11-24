@@ -51,6 +51,11 @@ src/gambling/Main.java          game loop (entry point)
 src/gambling/Story.java         story scenes
 src/gambling/games/             Blackjack, Card, CoinFlip, Craps, NumberGame, Roulette, Slots
 src/gambling/util/              Betting, Input
+bin/gambling/                   Main.class, Story.class
+bin/gambling/games/             Blackjack.class, Card.class, Coin flip.class, Craps.class, Number game.class, Roulette.class, Slots.class
+bin/gambling/util/              Betting.class, Input.class
+dist/                           Gambling-(version).zip
+dist/gambling/                  README.txt, gambling.jar, run.bat, run.sh
 build.sh                        builds the JAR and the release zip
 ```
 
