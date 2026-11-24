@@ -15,6 +15,21 @@ public class Main {
         boolean win = false;
         int test = 0;
 
+        Updater.Release r = Updater.findUpdate();
+        if (r != null) {
+            System.out.println("Update " + r.version() + " is available. Download it now? (yes/no)");
+            String answer = userin.nextLine();
+            if (Input.isYes(answer)) {
+                try {
+                    Updater.install(r);
+                    System.out.println("Downloaded. Restart the game to finish updating.");
+                } catch (Exception e) {
+                    System.out.println("Update failed, continuing with the current version.");
+                }
+            }
+        }
+
+
         // test mode
         switch (test) {
             case 1:  EndOfLoop.check(count, point, debt, userin); break;

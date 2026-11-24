@@ -20,14 +20,22 @@ mkdir -p bin "$OUT"
 echo "==> Compiling (targeting Java $JAVA_RELEASE)"
 javac --release "$JAVA_RELEASE" -encoding UTF-8 -d bin $(find src -name '*.java')
 
+# The game reads this at startup (Updater.currentVersion) to know what it is.
+echo "==> Stamping version: $VERSION"
+printf '%s\n' "$VERSION" > bin/version.txt
+
 echo "==> Building JAR"
 jar cfe "$OUT/$NAME.jar" "$MAIN" -C bin .
 
 echo "==> Writing launchers"
-# Linux / BSD / macOS
+# Linux / BSD / macOS. If the updater staged gambling.jar.new, swap it in
+# BEFORE java starts (a running jar can't be replaced on Windows).
 cat > "$OUT/run.sh" <<'EOF'
 #!/bin/sh
 cd "$(dirname "$0")"
+if [ -f gambling.jar.new ]; then
+  mv -f gambling.jar.new gambling.jar
+fi
 exec java -jar gambling.jar "$@"
 EOF
 chmod +x "$OUT/run.sh"
@@ -37,6 +45,7 @@ printf '%s\r\n' \
   '@echo off' \
   'chcp 65001 >nul' \
   'cd /d "%~dp0"' \
+  'if exist gambling.jar.new move /y gambling.jar.new gambling.jar >nul' \
   'java -jar gambling.jar %*' \
   'pause' > "$OUT/run.bat"
 
@@ -47,6 +56,9 @@ Requires Java $JAVA_RELEASE or newer.
 Windows:        double-click run.bat (use Windows Terminal for emojis)
 Linux/BSD/Mac:  ./run.sh   (or: sh run.sh)
 Any OS:         java -jar gambling.jar
+
+Updates: the game checks for new releases on startup. Always start it with
+run.sh / run.bat so a downloaded update is applied.
 EOF
 
 echo "==> Zipping"
@@ -72,6 +84,7 @@ echo "==> Checking"
 major=$(javap -v -cp bin "$MAIN" 2>/dev/null | awk '/major version/{print $3}')
 echo "    class version: $major (61 = Java 17)"
 [ "$major" = "61" ] || { echo "ERROR: wrong class version"; exit 1; }
+jar tf "$OUT/$NAME.jar" | grep -qx 'version.txt' || { echo "ERROR: version.txt missing from jar"; exit 1; }
 unzip -l "dist/$ZIP"
 
 # keep build output out of git
